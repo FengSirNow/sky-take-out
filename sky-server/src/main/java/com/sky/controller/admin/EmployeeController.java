@@ -75,6 +75,7 @@ public class EmployeeController {
 
     /**
      * 新增员工
+     *
      * @param employee
      * @return
      */
@@ -88,6 +89,7 @@ public class EmployeeController {
 
     /**
      * 分页查询
+     *
      * @param employeePageQuery
      * @return
      */
@@ -96,6 +98,22 @@ public class EmployeeController {
     public Result page(EmployeePageQueryDTO employeePageQuery) {
         PageResult pageResult = employeeService.pageQuery(employeePageQuery);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 启用禁用员工账号
+     *
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("员工状态修改")
+    public Result startOrStop(@PathVariable Integer status, Long id) {
+        log.info("员工状态：{}", status);
+        log.info("员工id：{}", id);
+        employeeService.startOrStop(status, id);
+        return Result.success();
     }
 
 }
