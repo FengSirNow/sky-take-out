@@ -8,6 +8,7 @@ import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -32,4 +33,11 @@ public interface DishMapper {
     void delete(Long id);
 
     void update(Dish dish);
+    @Select("select * from dish where category_id = #{categoryId}")
+    List<DishVO> list(Long categoryId);
+
+    List<Dish> getBySetmealId(Long id);
+    @Update("update dish set status = #{status} where id = #{id}")
+    @AutoFill(value = OperationType.UPDATE)
+    void startOrStop(Dish dish);
 }

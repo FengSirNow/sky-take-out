@@ -36,4 +36,7 @@
         </set>
         where id = #{id}
     </update>
+    <select id="getBySetmealId" resultType="com.sky.entity.Dish">
+        select * from dish where id in (select dish_id from setmeal_dish where setmeal_id = #{setmealId})
+    </select>
 </mapper>
